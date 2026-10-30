@@ -92,6 +92,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .skills{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
 @media (max-width:560px){.skills{grid-template-columns:minmax(0,1fr)}}
 .skillgroup{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 20px}
+.skills .skillgroup:last-child{grid-column:1 / -1}
 .skillgroup h3{font-size:17px; font-weight:600; margin-bottom:10px}
 .chips{display:flex; flex-wrap:wrap; gap:8px; list-style:none; padding:0}
 .chips li{font-family:var(--mono); font-size:13px; padding:4px 10px; border-radius:999px; background:var(--accent-soft)}
@@ -135,13 +136,15 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 @media (max-width:760px){.mobility{grid-template-columns:minmax(0,1fr)}}
 
 /* Engagement & activities */
-.cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:16px}
+.cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:16px}
 .card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px}
 .card .when{display:block; margin-bottom:6px}
 .card h3{font-size:19px; font-weight:600; margin-bottom:6px}
 
 /* Contact */
-.contact-list{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:16px}
+.contact-list{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+.cards.two{grid-template-columns:repeat(2, minmax(0,1fr))}
+@media (max-width:560px){.contact-list,.cards.two{grid-template-columns:minmax(0,1fr)}}
 .contact-item{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 20px; display:flex; flex-direction:column; gap:4px; min-width:0}
 .contact-item .k{font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
 .contact-item .v{font-size:17px; font-weight:500; overflow-wrap:anywhere}
@@ -188,7 +191,9 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
       </div>
       <div class="cta">
         <a class="btn solid" href="#projects"><span data-l="fr">Voir mes projets</span><span data-l="en">See my projects</span></a>
-        <a class="btn" href="assets/cv-ibrahim-ben-yakhlef-fr.pdf" target="_blank" rel="noopener"><span data-l="fr">CV (PDF)</span><span data-l="en">Résumé (PDF, French)</span></a>
+        <a class="btn" data-l="fr" href="assets/cv-ibrahim-ben-yakhlef-fr.pdf" download>Télécharger mon CV</a>
+        <a class="btn" data-l="en" href="assets/resume-ibrahim-ben-yakhlef-en.pdf" download>Download my résumé</a>
+        <a class="btn" href="https://www.linkedin.com/in/ibrahim-ben-yakhlef-358708281" target="_blank" rel="noopener">LinkedIn</a>
         <a class="btn js-github" href="#" target="_blank" rel="noopener" hidden>GitHub</a>
       </div>
     </div>
@@ -210,7 +215,11 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
       <div class="skills">
         <div class="skillgroup">
           <h3><span data-l="fr">Langages</span><span data-l="en">Languages</span></h3>
-          <ul class="chips"><li>Python</li><li>Ada</li></ul>
+          <ul class="chips"><li>Python</li><li>Ada</li><li>JavaScript</li><li>HTML</li><li>CSS</li></ul>
+        </div>
+        <div class="skillgroup">
+          <h3>Web</h3>
+          <ul class="chips"><li>React (React.js)</li></ul>
         </div>
         <div class="skillgroup">
           <h3><span data-l="fr">Informatique</span><span data-l="en">Computer science</span></h3>
@@ -242,7 +251,7 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
 
       <figure class="coding js-coding">
         <img src="assets/coding.jpg" alt="Ibrahim en train de programmer" onerror="this.closest('figure').hidden=true">
-        <figcaption><span data-l="fr">Au travail sur un projet.</span><span data-l="en">Working on a project.</span></figcaption>
+        <figcaption><span data-l="fr">Concentré sur du code, à mon bureau.</span><span data-l="en">Focused on code at my desk.</span></figcaption>
       </figure>
     </div>
   </div>
@@ -297,7 +306,8 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
         <li><span class="when">2023 – 2024</span><div><h3><span data-l="fr">Baccalauréat Sciences Mathématiques</span><span data-l="en">Baccalauréat in Mathematical Sciences</span></h3><p><span data-l="fr">Mention Très Bien, Lycée Moulay Ismail</span><span data-l="en">Très Bien (highest honors), Lycée Moulay Ismail</span></p><p class="place"><span data-l="fr">Driouch, Maroc</span><span data-l="en">Driouch, Morocco</span></p></div></li>
       </ol>
       <div class="cta" style="margin-top:0">
-        <a class="btn solid" href="assets/cv-ibrahim-ben-yakhlef-fr.pdf" target="_blank" rel="noopener"><span data-l="fr">Télécharger mon CV</span><span data-l="en">Download my résumé (French)</span></a>
+        <a class="btn solid" href="assets/cv-ibrahim-ben-yakhlef-fr.pdf" download><span data-l="fr">CV en français (PDF)</span><span data-l="en">Résumé in French (PDF)</span></a>
+        <a class="btn solid" href="assets/resume-ibrahim-ben-yakhlef-en.pdf" download><span data-l="fr">CV en anglais (PDF)</span><span data-l="en">Résumé in English (PDF)</span></a>
         <a class="btn" href="https://www.linkedin.com/in/ibrahim-ben-yakhlef-358708281" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
@@ -331,7 +341,9 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
   <div class="inner">
     <div class="label"><span class="tag">05</span><h2><span data-l="fr">Engagement</span><span data-l="en">Engagement</span></h2></div>
     <div class="content">
-      <div class="cards">
+      <div class="cards two">
+        <div class="card"><span class="when">2026 · ENSEEIHT</span><h3><span data-l="fr">Fresque du Climat</span><span data-l="en">Climate Fresk</span></h3><p><span data-l="fr">Participation à l’atelier de la Fresque du Climat.</span><span data-l="en">Took part in the Climate Fresk (Fresque du Climat) workshop.</span></p></div>
+        <div class="card"><span class="when">2026 · ENSEEIHT</span><h3><span data-l="fr">Procès King Kong</span><span data-l="en">King Kong Trial</span></h3><p><span data-l="fr">Participation au procès King Kong.</span><span data-l="en">Took part in the King Kong Trial (Procès King Kong).</span></p></div>
         <div class="card"><span class="when"><span data-l="fr">Sept. 2023 · Maroc</span><span data-l="en">Sep 2023 · Morocco</span></span><h3><span data-l="fr">Séisme d’Al Haouz</span><span data-l="en">Al Haouz earthquake</span></h3><p><span data-l="fr">Bénévole lors de l’aide aux sinistrés.</span><span data-l="en">Volunteer in the relief effort.</span></p></div>
         <div class="card"><span class="when"><span data-l="fr">Maroc</span><span data-l="en">Morocco</span></span><h3><span data-l="fr">Don du sang</span><span data-l="en">Blood donation</span></h3><p><span data-l="fr">Donneur de sang bénévole.</span><span data-l="en">Voluntary blood donor.</span></p></div>
       </div>
