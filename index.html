@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ibrahim Ben Yakhlef</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfolio d'Ibrahim Ben Yakhlef, élève-ingénieur en informatique à l'ENSEEIHT (N7), Toulouse.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky top bar; hero = name + portrait over a running ECG trace (the TIPE's signal);
+   then full-width bands, each with a mono label rail and a content column. */
+:root{
+  --bg:#F6F5F9; --surface:#FFFFFF; --fg:#17151F; --muted:#5C586A; --line:#DEDAE8;
+  --accent:#5B4A9B; --accent-ink:#FFFFFF; --accent-soft:#ECE8F8; --trace:#5B4A9B;
+  --display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;
+  --body:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --max:1080px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121019; --surface:#1B1824; --fg:#EDEBF3; --muted:#A7A2B7; --line:#2E2A3B;
+  --accent:#B6A7F0; --accent-ink:#17121F; --accent-soft:#272238; --trace:#B6A7F0; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121019; --surface:#1B1824; --fg:#EDEBF3; --muted:#A7A2B7; --line:#2E2A3B;
+  --accent:#B6A7F0; --accent-ink:#17121F; --accent-soft:#272238; --trace:#B6A7F0; color-scheme:dark}
+
+[hidden]{display:none !important}
+/* Language switch: every bilingual string exists twice, the inactive one is hidden */
+html[lang="fr"] [data-l="en"], html[lang="en"] [data-l="fr"]{display:none !important}
+
+html{scroll-behavior:smooth; scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0; background:var(--bg); color:var(--fg); font-family:var(--body); font-size:17px; line-height:1.6}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+h1,h2,h3{font-family:var(--display); text-wrap:balance; line-height:1.1}
+p{text-wrap:pretty}
+a{color:var(--accent); text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+.inner{max-width:var(--max); margin:0 auto; padding-left:max(20px, env(safe-area-inset-left,0px)); padding-right:max(20px, env(safe-area-inset-right,0px))}
+
+/* Top bar */
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:30; background:var(--bg)}
+.bar{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.bar .inner{display:flex; align-items:center; gap:20px; min-height:60px; flex-wrap:wrap; padding-block:6px}
+.brand{font-family:var(--display); font-weight:800; font-size:18px; color:var(--fg); text-decoration:none; letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+.nav{display:flex; gap:4px 18px; flex-wrap:wrap; margin-left:auto; font-size:14.5px}
+.nav a{color:var(--muted); text-decoration:none; padding:6px 0}
+.nav a:hover{color:var(--fg)}
+.lang{display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:3px; gap:2px}
+.lang button{font-family:var(--mono); font-size:13px; border:0; background:transparent; color:var(--muted); min-width:40px; min-height:32px; border-radius:999px; cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink)}
+@media (max-width:760px){.nav{order:3; width:100%; margin-left:0; overflow-x:auto; flex-wrap:nowrap; padding-bottom:4px}.nav a{white-space:nowrap}.lang{margin-left:auto}}
+
+/* Hero */
+.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line)}
+.hero .inner{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr); gap:48px; align-items:center; padding-block:72px 112px; position:relative; z-index:1}
+.kicker{font-family:var(--mono); font-size:13.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.hero h1{font-size:clamp(46px, 8vw, 92px); font-weight:800; letter-spacing:-.03em; margin:14px 0 20px}
+.hero h1 .l2{display:block; color:var(--muted); font-weight:400}
+.tagline{font-size:20px; max-width:32em}
+.where{display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:22px; font-family:var(--mono); font-size:14px; color:var(--muted)}
+.cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:30px}
+.btn{display:inline-flex; align-items:center; gap:8px; min-height:46px; padding:0 20px; border-radius:999px; font-weight:500; font-size:15.5px; text-decoration:none; border:1px solid var(--accent); color:var(--accent); background:transparent}
+.btn.solid{background:var(--accent); color:var(--accent-ink)}
+.btn:hover{filter:brightness(1.08)}
+.btn svg{width:18px; height:18px}
+.portrait{justify-self:end; width:100%; max-width:300px}
+.portrait img{display:block; width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center 28%; border-radius:18px; background:#fff}
+.ecg{position:absolute; left:0; right:0; bottom:18px; height:90px; z-index:0; pointer-events:none}
+.ecg svg{width:100%; height:100%; display:block}
+.ecg path{fill:none; stroke:var(--trace); stroke-width:2; opacity:.55; stroke-linejoin:round}
+.ecg .sweep{stroke-dasharray:2400; stroke-dashoffset:2400; animation:sweep 6s linear infinite}
+@keyframes sweep{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){.ecg .sweep{animation:none; stroke-dashoffset:0}}
+@media (max-width:760px){.hero .inner{grid-template-columns:minmax(0,1fr); padding-block:44px 100px; gap:32px}.portrait{justify-self:start; max-width:220px; order:-1}}
+
+/* Bands */
+.band{border-bottom:1px solid var(--line)}
+.band .inner{display:grid; grid-template-columns:200px minmax(0,1fr); gap:32px; padding-block:72px}
+.label{display:flex; flex-direction:column; gap:6px}
+.label .tag{font-family:var(--mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
+.label h2{font-size:34px; font-weight:800; letter-spacing:-.02em}
+.content{display:flex; flex-direction:column; gap:36px; min-width:0}
+.sub{font-family:var(--mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:14px}
+@media (max-width:760px){.band .inner{grid-template-columns:minmax(0,1fr); gap:20px; padding-block:52px}}
+
+/* Skills */
+.skills{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+@media (max-width:560px){.skills{grid-template-columns:minmax(0,1fr)}}
+.skillgroup{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 20px}
+.skillgroup h3{font-size:17px; font-weight:600; margin-bottom:10px}
+.chips{display:flex; flex-wrap:wrap; gap:8px; list-style:none; padding:0}
+.chips li{font-family:var(--mono); font-size:13px; padding:4px 10px; border-radius:999px; background:var(--accent-soft)}
+
+/* Projects */
+.projects{display:grid; grid-template-columns:minmax(0,1fr); gap:20px}
+.project{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:26px; display:grid; grid-template-columns:minmax(0,1fr); gap:14px}
+.project .top{display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center; font-family:var(--mono); font-size:13px; color:var(--muted)}
+.status{color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:1px 10px}
+.project h3{font-size:25px; font-weight:600}
+.project .q{font-style:italic; color:var(--muted)}
+.project ul{padding-left:20px; display:flex; flex-direction:column; gap:4px}
+.project ul.chips{flex-direction:row; padding-left:0; gap:8px}
+.project .note{font-size:14px; color:var(--muted)}
+.project .links{display:flex; gap:10px; flex-wrap:wrap}
+.project .links:empty{display:none}
+
+/* Coding photo */
+.coding{display:grid; grid-template-columns:minmax(0,1fr); gap:10px}
+.coding img{display:block; width:100%; max-height:460px; object-fit:cover; border-radius:16px}
+.coding figcaption{font-size:14px; color:var(--muted)}
+
+/* Timeline */
+.timeline{list-style:none; padding:0; display:flex; flex-direction:column}
+.timeline li{display:grid; grid-template-columns:130px minmax(0,1fr); gap:20px; padding:18px 0; border-top:1px solid var(--line)}
+.timeline li:first-child{border-top:0; padding-top:0}
+.when{font-family:var(--mono); font-size:14px; color:var(--muted); font-variant-numeric:tabular-nums; padding-top:3px}
+.timeline h3{font-size:20px; font-weight:600}
+.timeline .place{color:var(--muted); font-size:15px}
+@media (max-width:480px){.timeline li{grid-template-columns:minmax(0,1fr); gap:2px}}
+
+/* Mobility */
+.mobility{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:28px; align-items:start}
+.dest{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
+.dest span{font-family:var(--display); font-size:22px; font-weight:600; padding:10px 18px; border-radius:12px; background:var(--accent-soft)}
+.langs{list-style:none; padding:0; display:flex; flex-direction:column; gap:12px}
+.langs li{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 12px; align-items:center}
+.meter{grid-column:1 / -1; height:6px; border-radius:3px; background:var(--line); overflow:hidden}
+.meter i{display:block; height:100%; background:var(--accent); border-radius:3px}
+.lvl{font-family:var(--mono); font-size:13px; color:var(--muted)}
+@media (max-width:760px){.mobility{grid-template-columns:minmax(0,1fr)}}
+
+/* Engagement & activities */
+.cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:16px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px}
+.card .when{display:block; margin-bottom:6px}
+.card h3{font-size:19px; font-weight:600; margin-bottom:6px}
+
+/* Contact */
+.contact-list{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:16px}
+.contact-item{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:18px 20px; display:flex; flex-direction:column; gap:4px; min-width:0}
+.contact-item .k{font-family:var(--mono); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.contact-item .v{font-size:17px; font-weight:500; overflow-wrap:anywhere}
+.copy{align-self:flex-start; margin-top:6px; font-family:var(--mono); font-size:12.5px; border:1px solid var(--line); background:transparent; color:var(--fg); border-radius:999px; padding:0 12px; min-height:32px; cursor:pointer}
+.copy:hover{border-color:var(--accent)}
+
+footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-family:var(--mono); font-size:13px; color:var(--muted)}
+</style>
+</head>
+<body>
+
+
+<header class="bar">
+  <div class="inner">
+    <a class="brand" href="#welcome">Ibrahim<span>.</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#engineering"><span data-l="fr">Ingénierie</span><span data-l="en">Engineering</span></a>
+      <a href="#projects"><span data-l="fr">Projets</span><span data-l="en">Projects</span></a>
+      <a href="#career"><span data-l="fr">Parcours</span><span data-l="en">Career</span></a>
+      <a href="#mobility"><span data-l="fr">Mobilité</span><span data-l="en">Mobility</span></a>
+      <a href="#engagement"><span data-l="fr">Engagement</span><span data-l="en">Engagement</span></a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" id="lang-fr" data-set="fr" aria-pressed="false">FR</button>
+      <button type="button" id="lang-en" data-set="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="welcome">
+  <div class="inner">
+    <div>
+      <p class="kicker"><span data-l="fr">Élève-ingénieur · Informatique</span><span data-l="en">Engineering student · Computer Science</span></p>
+      <h1>Ibrahim <span class="l2">Ben Yakhlef</span></h1>
+      <p class="tagline">
+        <span data-l="fr">Élève-ingénieur en Sciences du Numérique à l’ENSEEIHT. Je viens des classes préparatoires et je me dirige vers le génie logiciel, avec un goût pour les algorithmes et le traitement du signal.</span>
+        <span data-l="en">Computer Science engineering student at ENSEEIHT. I come from the French-style preparatory classes (CPGE) and I am heading toward software engineering, with a taste for algorithms and signal processing.</span>
+      </p>
+      <div class="where">
+        <span>ENSEEIHT (N7) · Toulouse INP</span>
+        <span>Toulouse, France</span>
+      </div>
+      <div class="cta">
+        <a class="btn solid" href="#projects"><span data-l="fr">Voir mes projets</span><span data-l="en">See my projects</span></a>
+        <a class="btn" href="assets/cv-ibrahim-ben-yakhlef-fr.pdf" target="_blank" rel="noopener"><span data-l="fr">CV (PDF)</span><span data-l="en">Résumé (PDF, French)</span></a>
+        <a class="btn js-github" href="#" target="_blank" rel="noopener" hidden>GitHub</a>
+      </div>
+    </div>
+    <figure class="portrait">
+      <img src="assets/photo.jpg" alt="Portrait d’Ibrahim Ben Yakhlef">
+    </figure>
+  </div>
+  <div class="ecg" aria-hidden="true">
+    <svg viewBox="0 0 1200 90" preserveAspectRatio="none">
+      <path class="sweep" d="M0 60 H70 l8 -6 l8 6 H112 l5 6 l9 -56 l9 66 l6 -16 H190 q14 -14 28 0 H300 l8 -6 l8 6 H342 l5 6 l9 -56 l9 66 l6 -16 H420 q14 -14 28 0 H530 l8 -6 l8 6 H572 l5 6 l9 -56 l9 66 l6 -16 H650 q14 -14 28 0 H760 l8 -6 l8 6 H802 l5 6 l9 -56 l9 66 l6 -16 H880 q14 -14 28 0 H990 l8 -6 l8 6 H1032 l5 6 l9 -56 l9 66 l6 -16 H1110 q14 -14 28 0 H1200"/>
+    </svg>
+  </div>
+</section>
+
+<section class="band" id="engineering">
+  <div class="inner">
+    <div class="label"><span class="tag">01</span><h2><span data-l="fr">Ingénierie</span><span data-l="en">Engineering</span></h2></div>
+    <div class="content">
+      <div class="skills">
+        <div class="skillgroup">
+          <h3><span data-l="fr">Langages</span><span data-l="en">Languages</span></h3>
+          <ul class="chips"><li>Python</li><li>Ada</li></ul>
+        </div>
+        <div class="skillgroup">
+          <h3><span data-l="fr">Informatique</span><span data-l="en">Computer science</span></h3>
+          <ul class="chips">
+            <li><span data-l="fr">Conception d’algorithmes</span><span data-l="en">Algorithm design</span></li>
+            <li><span data-l="fr">Programmation structurée</span><span data-l="en">Structured programming</span></li>
+            <li><span data-l="fr">Résolution de problèmes</span><span data-l="en">Problem solving</span></li>
+          </ul>
+        </div>
+        <div class="skillgroup">
+          <h3><span data-l="fr">Signal &amp; ingénierie</span><span data-l="en">Signal &amp; engineering</span></h3>
+          <ul class="chips">
+            <li><span data-l="fr">Traitement du signal</span><span data-l="en">Signal processing</span></li>
+            <li><span data-l="fr">Analyse ECG</span><span data-l="en">ECG analysis</span></li>
+            <li>Arduino</li>
+            <li><span data-l="fr">Modélisation mathématique</span><span data-l="en">Mathematical modeling</span></li>
+          </ul>
+        </div>
+        <div class="skillgroup">
+          <h3><span data-l="fr">Savoir-être</span><span data-l="en">Soft skills</span></h3>
+          <ul class="chips">
+            <li><span data-l="fr">Esprit d’analyse</span><span data-l="en">Analytical thinking</span></li>
+            <li><span data-l="fr">Rigueur</span><span data-l="en">Rigor</span></li>
+            <li><span data-l="fr">Adaptabilité</span><span data-l="en">Adaptability</span></li>
+            <li><span data-l="fr">Curiosité</span><span data-l="en">Curiosity</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <figure class="coding js-coding">
+        <img src="assets/coding.jpg" alt="Ibrahim en train de programmer" onerror="this.closest('figure').hidden=true">
+        <figcaption><span data-l="fr">Au travail sur un projet.</span><span data-l="en">Working on a project.</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="projects">
+  <div class="inner">
+    <div class="label"><span class="tag">02</span><h2><span data-l="fr">Projets</span><span data-l="en">Projects</span></h2></div>
+    <div class="content">
+      <div class="projects">
+
+        <article class="project">
+          <div class="top"><span class="status"><span data-l="fr">TIPE · CPGE</span><span data-l="en">Research project · CPGE</span></span><span>Lycée Omar Ibn Abdelaziz, Oujda</span></div>
+          <h3><span data-l="fr">Analyse des cycles cardiaques à partir des intervalles RR d’un signal ECG</span><span data-l="en">ECG Signal Processing and Heart Rate Variability Analysis from RR Intervals</span></h3>
+          <p class="q"><span data-l="fr">Comment automatiser la surveillance du rythme cardiaque afin d’assurer une détection fiable des anomalies en temps réel ?</span><span data-l="en">How can heart rhythm monitoring be automated so that anomalies are detected reliably in real time?</span></p>
+          <p><span data-l="fr">J’ai étudié l’influence des conditions d’acquisition et de filtrage sur la détection des pics R, la stabilité des intervalles RR et les indicateurs de variabilité cardiaque.</span><span data-l="en">I studied how acquisition and filtering conditions affect R-peak detection, the stability of RR intervals and heart rate variability indicators.</span></p>
+          <ul>
+            <li><span data-l="fr">Acquisition d’un signal ECG avec un capteur AD8232 et une carte Arduino.</span><span data-l="en">ECG acquisition with an AD8232 sensor and an Arduino board.</span></li>
+            <li><span data-l="fr">Influence de la fréquence d’échantillonnage ; filtrage analogique et numérique.</span><span data-l="en">Influence of the sampling frequency; analog and digital filtering.</span></li>
+            <li><span data-l="fr">Détection des pics R, extraction des intervalles RR, indicateurs SDNN, RMSSD et LF/HF.</span><span data-l="en">R-peak detection, RR interval extraction, SDNN, RMSSD and LF/HF indicators.</span></li>
+            <li><span data-l="fr">Modélisation des erreurs de mesure ; traitement des données en Python.</span><span data-l="en">Modeling of measurement errors; data processing in Python.</span></li>
+          </ul>
+          <ul class="chips"><li>Python</li><li>Arduino</li><li>AD8232</li><li><span data-l="fr">Traitement du signal</span><span data-l="en">Signal processing</span></li></ul>
+          <p class="note"><span data-l="fr">Projet d’étude académique, pas un outil de diagnostic médical.</span><span data-l="en">Academic engineering study, not a medical diagnostic tool.</span></p>
+          <div class="links js-links" data-repo="tipe"></div>
+        </article>
+
+        <article class="project">
+          <div class="top"><span class="status"><span data-l="fr">Projet PIM · 2026</span><span data-l="en">PIM course · 2026</span></span><span>ENSEEIHT, Toulouse</span></div>
+          <h3><span data-l="fr">Jeu du devin en Ada</span><span data-l="en">Guessing Game in Ada</span></h3>
+          <p><span data-l="fr">Un jeu de devinette développé en Ada, en appliquant la méthodologie de programmation du cours : concevoir l’algorithme d’abord, puis le programmer de façon structurée.</span><span data-l="en">A guessing game developed in Ada, applying the course’s programming methodology: design the algorithm first, then implement it in a structured way.</span></p>
+          <ul>
+            <li><span data-l="fr">Conception de l’algorithme avant la programmation.</span><span data-l="en">Algorithm designed before writing any code.</span></li>
+            <li><span data-l="fr">Découpage en procédures et fonctions ; structures de contrôle.</span><span data-l="en">Decomposition into procedures and functions; control structures.</span></li>
+          </ul>
+          <ul class="chips"><li>Ada</li><li><span data-l="fr">Algorithmique</span><span data-l="en">Algorithms</span></li><li><span data-l="fr">Programmation structurée</span><span data-l="en">Structured programming</span></li></ul>
+          <div class="links js-links" data-repo="pim"></div>
+        </article>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="career">
+  <div class="inner">
+    <div class="label"><span class="tag">03</span><h2><span data-l="fr">Parcours</span><span data-l="en">Career</span></h2></div>
+    <div class="content">
+      <ol class="timeline">
+        <li><span class="when"><span data-l="fr">Depuis 2026</span><span data-l="en">2026 –</span></span><div><h3>ENSEEIHT (N7), Toulouse INP</h3><p><span data-l="fr">Diplôme d’ingénieur, Sciences du Numérique (informatique)</span><span data-l="en">Engineering degree, Computer Science (Sciences du Numérique)</span></p><p class="place">Toulouse, France</p></div></li>
+        <li><span class="when">2024 – 2026</span><div><h3><span data-l="fr">Classes préparatoires (CPGE)</span><span data-l="en">Preparatory classes (CPGE)</span></h3><p><span data-l="fr">Mathématiques et physique, Lycée Omar Ibn Abdelaziz</span><span data-l="en">Mathematics and physics, Lycée Omar Ibn Abdelaziz</span></p><p class="place"><span data-l="fr">Oujda, Maroc</span><span data-l="en">Oujda, Morocco</span></p></div></li>
+        <li><span class="when">2023 – 2024</span><div><h3><span data-l="fr">Baccalauréat Sciences Mathématiques</span><span data-l="en">Baccalauréat in Mathematical Sciences</span></h3><p><span data-l="fr">Mention Très Bien, Lycée Moulay Ismail</span><span data-l="en">Très Bien (highest honors), Lycée Moulay Ismail</span></p><p class="place"><span data-l="fr">Driouch, Maroc</span><span data-l="en">Driouch, Morocco</span></p></div></li>
+      </ol>
+      <div class="cta" style="margin-top:0">
+        <a class="btn solid" href="assets/cv-ibrahim-ben-yakhlef-fr.pdf" target="_blank" rel="noopener"><span data-l="fr">Télécharger mon CV</span><span data-l="en">Download my résumé (French)</span></a>
+        <a class="btn" href="https://www.linkedin.com/in/ibrahim-ben-yakhlef-358708281" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="mobility">
+  <div class="inner">
+    <div class="label"><span class="tag">04</span><h2><span data-l="fr">Mobilité</span><span data-l="en">Mobility</span></h2></div>
+    <div class="content">
+      <div class="mobility">
+        <div>
+          <p><span data-l="fr">Après le Maroc et la France, je suis intéressé par une mobilité en Amérique du Nord, dans le cadre de mes études ou d’une expérience professionnelle.</span><span data-l="en">After Morocco and France, I am interested in a mobility in North America, as part of my studies or a professional experience.</span></p>
+          <div class="dest"><span><span data-l="fr">États-Unis</span><span data-l="en">United States</span></span><span>Canada</span></div>
+        </div>
+        <div>
+          <p class="sub"><span data-l="fr">Langues</span><span data-l="en">Languages</span></p>
+          <ul class="langs">
+            <li><span><span data-l="fr">Arabe</span><span data-l="en">Arabic</span></span><span class="lvl"><span data-l="fr">Langue maternelle</span><span data-l="en">Native</span></span><span class="meter"><i style="width:100%"></i></span></li>
+            <li><span><span data-l="fr">Français</span><span data-l="en">French</span></span><span class="lvl"><span data-l="fr">Courant, professionnel</span><span data-l="en">Professional working</span></span><span class="meter"><i style="width:85%"></i></span></li>
+            <li><span><span data-l="fr">Anglais</span><span data-l="en">English</span></span><span class="lvl"><span data-l="fr">Courant, professionnel</span><span data-l="en">Professional working</span></span><span class="meter"><i style="width:85%"></i></span></li>
+            <li><span><span data-l="fr">Allemand</span><span data-l="en">German</span></span><span class="lvl"><span data-l="fr">Débutant · LV2 à l’N7</span><span data-l="en">Elementary · learning at N7</span></span><span class="meter"><i style="width:20%"></i></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="engagement">
+  <div class="inner">
+    <div class="label"><span class="tag">05</span><h2><span data-l="fr">Engagement</span><span data-l="en">Engagement</span></h2></div>
+    <div class="content">
+      <div class="cards">
+        <div class="card"><span class="when"><span data-l="fr">Sept. 2023 · Maroc</span><span data-l="en">Sep 2023 · Morocco</span></span><h3><span data-l="fr">Séisme d’Al Haouz</span><span data-l="en">Al Haouz earthquake</span></h3><p><span data-l="fr">Bénévole lors de l’aide aux sinistrés.</span><span data-l="en">Volunteer in the relief effort.</span></p></div>
+        <div class="card"><span class="when"><span data-l="fr">Maroc</span><span data-l="en">Morocco</span></span><h3><span data-l="fr">Don du sang</span><span data-l="en">Blood donation</span></h3><p><span data-l="fr">Donneur de sang bénévole.</span><span data-l="en">Voluntary blood donor.</span></p></div>
+      </div>
+      <div>
+        <p class="sub"><span data-l="fr">En dehors des cours</span><span data-l="en">Outside class</span></p>
+        <div class="cards">
+          <div class="card"><h3>Sport</h3><p><span data-l="fr">Football et natation.</span><span data-l="en">Football (soccer) and swimming.</span></p></div>
+          <div class="card"><h3>Culture</h3><p><span data-l="fr">Cinéma et musique.</span><span data-l="en">Cinema and music.</span></p></div>
+          <div class="card"><h3><span data-l="fr">Langues</span><span data-l="en">Languages</span></h3><p><span data-l="fr">Les langues et les échanges culturels.</span><span data-l="en">Languages and cultural exchange.</span></p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="contact">
+  <div class="inner">
+    <div class="label"><span class="tag">06</span><h2>Contact</h2></div>
+    <div class="content">
+      <div class="contact-list">
+        <div class="contact-item"><span class="k">Email</span><span class="v" id="c-mail">ibrahimben930@gmail.com</span><button type="button" class="copy" data-copy="c-mail"><span data-l="fr">Copier</span><span data-l="en">Copy</span></button></div>
+        <div class="contact-item"><span class="k"><span data-l="fr">Téléphone</span><span data-l="en">Phone</span></span><span class="v" id="c-tel">+33 7 53 14 48 54</span><button type="button" class="copy" data-copy="c-tel"><span data-l="fr">Copier</span><span data-l="en">Copy</span></button></div>
+        <div class="contact-item"><span class="k">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/ibrahim-ben-yakhlef-358708281" target="_blank" rel="noopener">ibrahim-ben-yakhlef</a></div>
+        <div class="contact-item js-github-card" hidden><span class="k">GitHub</span><a class="v js-github" href="#" target="_blank" rel="noopener">GitHub</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="inner"><span>© 2026 Ibrahim Ben Yakhlef</span><span>ENSEEIHT · Toulouse</span></div>
+</footer>
+
+<script>
+/* ===== À REMPLIR / TO FILL IN =====
+   Ton nom d'utilisateur GitHub, par ex. "ibrahim-by". Laisse "" pour cacher les boutons GitHub.
+   Pour lier un projet à son dépôt, mets le nom du dépôt (ex. "tipe-ecg"). */
+var GITHUB_USER = "ibrahimben10";
+var REPOS = { tipe: "", pim: "" };
+/* ================================== */
+(function(){
+  var root = document.documentElement;
+  function setLang(l){
+    root.lang = l;
+    document.getElementById('lang-fr').setAttribute('aria-pressed', l === 'fr');
+    document.getElementById('lang-en').setAttribute('aria-pressed', l === 'en');
+    try { localStorage.setItem('lang', l); } catch(e){}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch(e){}
+  var nav = (navigator.language || 'fr').slice(0,2);
+  setLang(saved || (nav === 'fr' ? 'fr' : 'en'));
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.dataset.set); });
+  });
+
+  if (GITHUB_USER) {
+    var url = 'https://github.com/' + GITHUB_USER;
+    document.querySelectorAll('.js-github').forEach(function(a){ a.href = url; a.hidden = false; a.textContent = a.closest('.contact-item') ? 'github.com/' + GITHUB_USER : 'GitHub'; });
+    var card = document.querySelector('.js-github-card'); if (card) card.hidden = false;
+    document.querySelectorAll('.js-links').forEach(function(box){
+      var repo = REPOS[box.dataset.repo];
+      if (!repo) return;
+      var a = document.createElement('a');
+      a.className = 'btn'; a.target = '_blank'; a.rel = 'noopener';
+      a.href = url + '/' + repo; a.textContent = 'Code';
+      box.appendChild(a);
+    });
+  }
+
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.copy);
+      var text = el.textContent.trim();
+      var done = function(){ var o = btn.innerHTML; btn.textContent = root.lang === 'fr' ? 'Copié' : 'Copied'; setTimeout(function(){ btn.innerHTML = o; }, 1500); };
+      var fallback = function(){ var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
