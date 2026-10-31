@@ -53,7 +53,14 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .lang{display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:3px; gap:2px}
 .lang button{font-family:var(--mono); font-size:13px; border:0; background:transparent; color:var(--muted); min-width:40px; min-height:32px; border-radius:999px; cursor:pointer}
 .lang button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink)}
-@media (max-width:760px){.nav{order:3; width:100%; margin-left:0; overflow-x:auto; flex-wrap:nowrap; padding-bottom:4px}.nav a{white-space:nowrap}.lang{margin-left:auto}}
+.theme{display:inline-grid; place-items:center; width:40px; height:40px; border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--fg); cursor:pointer; padding:0}
+.theme:hover{border-color:var(--accent); color:var(--accent)}
+.theme svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+.theme .i-moon path{fill:currentColor; stroke:none}
+.theme .i-sun{display:none}
+:root[data-theme="dark"] .theme .i-sun{display:block}
+:root[data-theme="dark"] .theme .i-moon{display:none}
+@media (max-width:760px){.nav{order:3; width:100%; margin-left:0; overflow-x:auto; flex-wrap:nowrap; padding-bottom:4px}.nav a{white-space:nowrap}.theme{margin-left:auto}}
 
 /* Hero */
 .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line)}
@@ -181,6 +188,10 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
       <a href="#engagement"><span data-l="fr">Engagement</span><span data-l="en">Engagement</span></a>
       <a href="#contact">Contact</a>
     </nav>
+    <button type="button" class="theme" id="theme-toggle" aria-label="Mode sombre / Dark mode" title="Mode clair / sombre · Light / dark mode">
+      <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+    </button>
     <div class="lang" role="group" aria-label="Langue / Language">
       <button type="button" id="lang-fr" data-set="fr" aria-pressed="false">FR</button>
       <button type="button" id="lang-en" data-set="en" aria-pressed="false">EN</button>
@@ -405,7 +416,8 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
     <div class="label"><span class="tag">05</span><h2><span data-l="fr">Engagement</span><span data-l="en">Engagement</span></h2></div>
     <div class="content">
       <div class="cards two">
-        <div class="card wide"><span class="when">2026 · Toulouse</span><h3>Futur Proche</h3><p><span data-l="fr">Membre engagé de Futur Proche.</span><span data-l="en">Active member of Futur Proche.</span></p></div>
+        <div class="card"><span class="when">2026 · Toulouse</span><h3>Futur Proche</h3><p><span data-l="fr">Membre engagé de Futur Proche.</span><span data-l="en">Active member of Futur Proche.</span></p></div>
+        <div class="card"><span class="when"><span data-l="fr">2024 – 2026 · Oujda, Maroc</span><span data-l="en">2024 – 2026 · Oujda, Morocco</span></span><h3><span data-l="fr">Club sportif de la CPGE</span><span data-l="en">CPGE sports club</span></h3><p><span data-l="fr">Membre du club sportif pendant les classes préparatoires, au Lycée Omar Ibn Abdelaziz.</span><span data-l="en">Member of the sports club during preparatory classes at Lycée Omar Ibn Abdelaziz.</span></p></div>
         <div class="card"><span class="when">2026 · ENSEEIHT</span><h3><span data-l="fr">Fresque du Climat</span><span data-l="en">Climate Fresk</span></h3><p><span data-l="fr">Participation à l’atelier de la Fresque du Climat.</span><span data-l="en">Took part in the Climate Fresk (Fresque du Climat) workshop.</span></p></div>
         <div class="card"><span class="when">2026 · ENSEEIHT</span><h3><span data-l="fr">Procès King Kong</span><span data-l="en">King Kong Trial</span></h3><p><span data-l="fr">Participation au procès King Kong.</span><span data-l="en">Took part in the King Kong Trial (Procès King Kong).</span></p></div>
         <div class="card"><span class="when"><span data-l="fr">Sept. 2023 · Maroc</span><span data-l="en">Sep 2023 · Morocco</span></span><h3><span data-l="fr">Séisme d’Al Haouz</span><span data-l="en">Al Haouz earthquake</span></h3><p><span data-l="fr">Bénévole lors de l’aide aux sinistrés.</span><span data-l="en">Volunteer in the relief effort.</span></p></div>
@@ -461,6 +473,28 @@ var REPOS = { tipe: "", pim: "", snake: "pocket-snake" };
   try { saved = localStorage.getItem('lang'); } catch(e){}
   var nav = (navigator.language || 'fr').slice(0,2);
   setLang(saved || (nav === 'fr' ? 'fr' : 'en'));
+
+  // Light / dark mode: follows the system until the visitor picks one, then remembers it
+  var themeBtn = document.getElementById('theme-toggle');
+  var mq = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+  var savedTheme = null;
+  try { savedTheme = localStorage.getItem('theme'); } catch(e){}
+  function applyTheme(t){
+    root.setAttribute('data-theme', t);
+    var dark = t === 'dark';
+    themeBtn.setAttribute('aria-pressed', dark);
+    themeBtn.setAttribute('aria-label', dark ? 'Mode clair / Light mode' : 'Mode sombre / Dark mode');
+  }
+  applyTheme(savedTheme || (mq && mq.matches ? 'dark' : 'light'));
+  themeBtn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('theme', next); } catch(e){}
+  });
+  if (mq && mq.addEventListener) mq.addEventListener('change', function(e){
+    var s = null; try { s = localStorage.getItem('theme'); } catch(err){}
+    if (!s) applyTheme(e.matches ? 'dark' : 'light');
+  });
   document.querySelectorAll('.lang button').forEach(function(b){
     b.addEventListener('click', function(){ setLang(b.dataset.set); });
   });
