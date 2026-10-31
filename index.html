@@ -124,6 +124,18 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .timeline .place{color:var(--muted); font-size:15px}
 @media (max-width:480px){.timeline li{grid-template-columns:minmax(0,1fr); gap:2px}}
 
+/* Courses */
+.courses{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
+.sem{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px; min-width:0}
+.sem h3{font-size:19px; font-weight:600; margin-bottom:14px; display:flex; flex-wrap:wrap; align-items:center; gap:10px}
+.sem-state{font-family:var(--mono); font-size:12px; font-weight:400; letter-spacing:.04em; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:0 9px}
+.sem dl{margin:0; display:flex; flex-direction:column; gap:6px}
+.sem dt{font-size:14.5px; font-weight:600; margin-top:8px}
+.sem dt:first-child{margin-top:0}
+.sem dd{margin:0}
+.note-sm{font-size:14px; color:var(--muted); margin-top:12px}
+@media (max-width:640px){.courses{grid-template-columns:minmax(0,1fr)}}
+
 /* Mobility */
 .mobility{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:28px; align-items:start}
 .dest{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px}
@@ -140,6 +152,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:20px}
 .card .when{display:block; margin-bottom:6px}
 .card h3{font-size:19px; font-weight:600; margin-bottom:6px}
+.card.wide{grid-column:1 / -1}
 
 /* Contact */
 .contact-list{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px}
@@ -291,6 +304,20 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
           <div class="links js-links" data-repo="pim"></div>
         </article>
 
+        <article class="project">
+          <div class="top"><span class="status"><span data-l="fr">Projet personnel · 2026</span><span data-l="en">Personal project · 2026</span></span><span><span data-l="fr">Jeu web</span><span data-l="en">Web game</span></span></div>
+          <h3>Pocket Snake</h3>
+          <p><span data-l="fr">Le jeu Snake classique, recréé en HTML, CSS et JavaScript sans aucune bibliothèque, avec l’allure d’une console portable à écran LCD. Il se joue au clavier sur ordinateur et au doigt sur téléphone.</span><span data-l="en">The classic Snake game rebuilt in plain HTML, CSS and JavaScript with no libraries, styled like a handheld console with an LCD screen. It plays with the keyboard on a computer and by touch on a phone.</span></p>
+          <ul>
+            <li><span data-l="fr">Boucle de jeu à pas fixe avec <code>requestAnimationFrame</code> et rendu sur Canvas.</span><span data-l="en">Fixed-step game loop with <code>requestAnimationFrame</code> and Canvas rendering.</span></li>
+            <li><span data-l="fr">File d’attente des directions pour éviter les demi-tours impossibles ; détection des collisions.</span><span data-l="en">Direction queue that prevents impossible U-turns; collision detection.</span></li>
+            <li><span data-l="fr">Niveaux de vitesse, bonus à durée limitée, mode « murs traversables », meilleur score sauvegardé.</span><span data-l="en">Speed levels, time-limited bonus food, wrap-around walls mode, saved high score.</span></li>
+            <li><span data-l="fr">Commandes clavier, glissements tactiles et croix directionnelle à l’écran.</span><span data-l="en">Keyboard controls, touch swipes and an on-screen d-pad.</span></li>
+          </ul>
+          <ul class="chips"><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Canvas</li></ul>
+          <div class="links js-links" data-repo="snake"><a class="btn solid" href="https://ibrahimben10.github.io/pocket-snake/" target="_blank" rel="noopener"><span data-l="fr">Jouer</span><span data-l="en">Play</span></a></div>
+        </article>
+
       </div>
     </div>
   </div>
@@ -305,6 +332,42 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
         <li><span class="when">2024 – 2026</span><div><h3><span data-l="fr">Classes préparatoires (CPGE)</span><span data-l="en">Preparatory classes (CPGE)</span></h3><p><span data-l="fr">Mathématiques et physique, Lycée Omar Ibn Abdelaziz</span><span data-l="en">Mathematics and physics, Lycée Omar Ibn Abdelaziz</span></p><p class="place"><span data-l="fr">Oujda, Maroc</span><span data-l="en">Oujda, Morocco</span></p></div></li>
         <li><span class="when">2023 – 2024</span><div><h3><span data-l="fr">Baccalauréat Sciences Mathématiques</span><span data-l="en">Baccalauréat in Mathematical Sciences</span></h3><p><span data-l="fr">Mention Très Bien, Lycée Moulay Ismail</span><span data-l="en">Très Bien (highest honors), Lycée Moulay Ismail</span></p><p class="place"><span data-l="fr">Driouch, Maroc</span><span data-l="en">Driouch, Morocco</span></p></div></li>
       </ol>
+      <div>
+        <p class="sub"><span data-l="fr">Cours à l’N7 · 1re année Sciences du Numérique</span><span data-l="en">Courses at N7 · First year, Computer Science</span></p>
+        <div class="courses">
+          <div class="sem">
+            <h3><span data-l="fr">Semestre 5</span><span data-l="en">Semester 5</span> <span class="sem-state"><span data-l="fr">en cours</span><span data-l="en">in progress</span></span></h3>
+            <dl>
+              <dt><span data-l="fr">Socle commun informatique</span><span data-l="en">Core computer science</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Architecture des ordinateurs 1</span><span data-l="en">Computer architecture 1</span></li><li><span data-l="fr">Programmation impérative 1</span><span data-l="en">Imperative programming 1</span></li><li><span data-l="fr">Langage C</span><span data-l="en">C language</span></li></ul></dd>
+              <dt><span data-l="fr">Modélisation et programmation</span><span data-l="en">Modeling and programming</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Modélisation</span><span data-l="en">Modeling</span></li><li><span data-l="fr">Programmation impérative 2</span><span data-l="en">Imperative programming 2</span></li></ul></dd>
+              <dt><span data-l="fr">Traitement du signal et automatique</span><span data-l="en">Signal processing and control</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Traitement du signal</span><span data-l="en">Signal processing</span></li><li><span data-l="fr">Automatique</span><span data-l="en">Control theory</span></li></ul></dd>
+              <dt><span data-l="fr">Intégration et probabilités</span><span data-l="en">Integration and probability</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Intégration et applications</span><span data-l="en">Integration and applications</span></li><li><span data-l="fr">Probabilités</span><span data-l="en">Probability</span></li></ul></dd>
+              <dt><span data-l="fr">Analyse numérique et statistiques</span><span data-l="en">Numerical analysis and statistics</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Optimisation et EDP</span><span data-l="en">Optimization and PDEs</span></li><li><span data-l="fr">Statistiques</span><span data-l="en">Statistics</span></li></ul></dd>
+            </dl>
+          </div>
+          <div class="sem">
+            <h3><span data-l="fr">Semestre 6</span><span data-l="en">Semester 6</span> <span class="sem-state"><span data-l="fr">à venir</span><span data-l="en">upcoming</span></span></h3>
+            <dl>
+              <dt><span data-l="fr">Technologie objet</span><span data-l="en">Object-oriented technology</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Programmation orientée objet</span><span data-l="en">Object-oriented programming</span></li></ul></dd>
+              <dt><span data-l="fr">Architecture et systèmes</span><span data-l="en">Architecture and systems</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Systèmes d’exploitation</span><span data-l="en">Operating systems</span></li><li><span data-l="fr">Architecture des ordinateurs 2</span><span data-l="en">Computer architecture 2</span></li><li><span data-l="fr">Langage C 2</span><span data-l="en">C language 2</span></li></ul></dd>
+              <dt><span data-l="fr">Réseaux</span><span data-l="en">Networks</span></dt>
+              <dd><ul class="chips"><li>Internet</li><li><span data-l="fr">Réseaux locaux</span><span data-l="en">Local area networks</span></li></ul></dd>
+              <dt><span data-l="fr">Calcul scientifique et analyse de données</span><span data-l="en">Scientific computing and data analysis</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Calcul scientifique</span><span data-l="en">Scientific computing</span></li><li><span data-l="fr">Analyse de données</span><span data-l="en">Data analysis</span></li><li><span data-l="fr">Projet</span><span data-l="en">Project</span></li></ul></dd>
+              <dt><span data-l="fr">Télécommunications</span><span data-l="en">Telecommunications</span></dt>
+              <dd><ul class="chips"><li><span data-l="fr">Télécommunications</span><span data-l="en">Telecommunications</span></li></ul></dd>
+            </dl>
+          </div>
+        </div>
+        <p class="note-sm"><span data-l="fr">Les deux semestres comprennent aussi anglais professionnel, allemand (LV2), sport et un module carrières et management.</span><span data-l="en">Both semesters also include professional English, German (second language), sport and a careers and management module.</span></p>
+      </div>
       <div class="cta" style="margin-top:0">
         <a class="btn solid" href="assets/cv-ibrahim-ben-yakhlef-fr.pdf" download><span data-l="fr">CV en français (PDF)</span><span data-l="en">Résumé in French (PDF)</span></a>
         <a class="btn solid" href="assets/resume-ibrahim-ben-yakhlef-en.pdf" download><span data-l="fr">CV en anglais (PDF)</span><span data-l="en">Résumé in English (PDF)</span></a>
@@ -342,6 +405,7 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
     <div class="label"><span class="tag">05</span><h2><span data-l="fr">Engagement</span><span data-l="en">Engagement</span></h2></div>
     <div class="content">
       <div class="cards two">
+        <div class="card wide"><span class="when">2026 · Toulouse</span><h3>Futur Proche</h3><p><span data-l="fr">Membre engagé de Futur Proche.</span><span data-l="en">Active member of Futur Proche.</span></p></div>
         <div class="card"><span class="when">2026 · ENSEEIHT</span><h3><span data-l="fr">Fresque du Climat</span><span data-l="en">Climate Fresk</span></h3><p><span data-l="fr">Participation à l’atelier de la Fresque du Climat.</span><span data-l="en">Took part in the Climate Fresk (Fresque du Climat) workshop.</span></p></div>
         <div class="card"><span class="when">2026 · ENSEEIHT</span><h3><span data-l="fr">Procès King Kong</span><span data-l="en">King Kong Trial</span></h3><p><span data-l="fr">Participation au procès King Kong.</span><span data-l="en">Took part in the King Kong Trial (Procès King Kong).</span></p></div>
         <div class="card"><span class="when"><span data-l="fr">Sept. 2023 · Maroc</span><span data-l="en">Sep 2023 · Morocco</span></span><h3><span data-l="fr">Séisme d’Al Haouz</span><span data-l="en">Al Haouz earthquake</span></h3><p><span data-l="fr">Bénévole lors de l’aide aux sinistrés.</span><span data-l="en">Volunteer in the relief effort.</span></p></div>
@@ -383,7 +447,7 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
    Ton nom d'utilisateur GitHub, par ex. "ibrahim-by". Laisse "" pour cacher les boutons GitHub.
    Pour lier un projet à son dépôt, mets le nom du dépôt (ex. "tipe-ecg"). */
 var GITHUB_USER = "ibrahimben10";
-var REPOS = { tipe: "", pim: "" };
+var REPOS = { tipe: "", pim: "", snake: "pocket-snake" };
 /* ================================== */
 (function(){
   var root = document.documentElement;
