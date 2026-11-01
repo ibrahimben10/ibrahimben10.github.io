@@ -174,6 +174,7 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 /* Video */
 .video-frame{position:relative; width:100%; max-width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#000; border:1px solid var(--line)}
 .video-frame video, .video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block; object-fit:contain; background:#000}
+.video-frame.vertical{aspect-ratio:9/16; width:min(100%, 360px)}
 .video-caption{font-size:15px; color:var(--muted)}
 footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-family:var(--mono); font-size:13px; color:var(--muted)}
 </style>
@@ -479,12 +480,14 @@ var REPOS = { tipe: "", pim: "", snake: "pocket-snake" };
    Option 2 : vidéo YouTube : mets ici son identifiant, par ex. "dQw4w9WgXcQ"
    (la partie après "watch?v=" ou après "youtu.be/"). */
 var VIDEO_FILE = "assets/video.mp4";
-var VIDEO_YOUTUBE_ID = "";
+var VIDEO_YOUTUBE_ID = "hscuQ_mhBp4";
+var VIDEO_VERTICAL = true; /* true pour un Short (format vertical 9:16) */
 /* ================================== */
 (function(){
   var section = document.getElementById('video');
   var frame = document.querySelector('.js-video-frame');
   if (!section || !frame) return;
+  if (VIDEO_VERTICAL) frame.classList.add('vertical');
   if (VIDEO_YOUTUBE_ID) {
     var f = document.createElement('iframe');
     f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(VIDEO_YOUTUBE_ID) + '?rel=0';
