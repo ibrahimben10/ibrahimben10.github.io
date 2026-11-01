@@ -171,6 +171,10 @@ body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-in
 .copy{align-self:flex-start; margin-top:6px; font-family:var(--mono); font-size:12.5px; border:1px solid var(--line); background:transparent; color:var(--fg); border-radius:999px; padding:0 12px; min-height:32px; cursor:pointer}
 .copy:hover{border-color:var(--accent)}
 
+/* Video */
+.video-frame{position:relative; width:100%; max-width:100%; aspect-ratio:16/9; border-radius:16px; overflow:hidden; background:#000; border:1px solid var(--line)}
+.video-frame video, .video-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0; display:block; object-fit:contain; background:#000}
+.video-caption{font-size:15px; color:var(--muted)}
 footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-family:var(--mono); font-size:13px; color:var(--muted)}
 </style>
 </head>
@@ -229,6 +233,16 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
     <svg viewBox="0 0 1200 90" preserveAspectRatio="none">
       <path class="sweep" d="M0 60 H70 l8 -6 l8 6 H112 l5 6 l9 -56 l9 66 l6 -16 H190 q14 -14 28 0 H300 l8 -6 l8 6 H342 l5 6 l9 -56 l9 66 l6 -16 H420 q14 -14 28 0 H530 l8 -6 l8 6 H572 l5 6 l9 -56 l9 66 l6 -16 H650 q14 -14 28 0 H760 l8 -6 l8 6 H802 l5 6 l9 -56 l9 66 l6 -16 H880 q14 -14 28 0 H990 l8 -6 l8 6 H1032 l5 6 l9 -56 l9 66 l6 -16 H1110 q14 -14 28 0 H1200"/>
     </svg>
+  </div>
+</section>
+
+<section class="band" id="video" hidden>
+  <div class="inner">
+    <div class="label"><span class="tag"><span data-l="fr">Vidéo</span><span data-l="en">Video</span></span><h2><span data-l="fr">En vidéo</span><span data-l="en">On video</span></h2></div>
+    <div class="content">
+      <div class="video-frame js-video-frame"></div>
+      <p class="video-caption"><span data-l="fr">Une courte présentation de mon parcours et de mes projets.</span><span data-l="en">A short introduction to my background and projects.</span></p>
+    </div>
   </div>
 </section>
 
@@ -460,7 +474,34 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
    Pour lier un projet à son dépôt, mets le nom du dépôt (ex. "tipe-ecg"). */
 var GITHUB_USER = "ibrahimben10";
 var REPOS = { tipe: "", pim: "", snake: "pocket-snake" };
+/* Vidéo / Video : la section reste cachée tant qu'il n'y a pas de vidéo.
+   Option 1 : dépose ta vidéo dans assets/ sous le nom video.mp4 (rien à changer ici).
+   Option 2 : vidéo YouTube : mets ici son identifiant, par ex. "dQw4w9WgXcQ"
+   (la partie après "watch?v=" ou après "youtu.be/"). */
+var VIDEO_FILE = "assets/video.mp4";
+var VIDEO_YOUTUBE_ID = "";
 /* ================================== */
+(function(){
+  var section = document.getElementById('video');
+  var frame = document.querySelector('.js-video-frame');
+  if (!section || !frame) return;
+  if (VIDEO_YOUTUBE_ID) {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(VIDEO_YOUTUBE_ID) + '?rel=0';
+    f.title = 'Vidéo de présentation / Introduction video';
+    f.allow = 'accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    f.loading = 'lazy';
+    frame.appendChild(f);
+    section.hidden = false;
+  } else if (VIDEO_FILE) {
+    var v = document.createElement('video');
+    v.controls = true; v.preload = 'metadata'; v.playsInline = true;
+    v.addEventListener('loadedmetadata', function(){ section.hidden = false; });
+    v.src = VIDEO_FILE;
+    frame.appendChild(v);
+  }
+})();
 (function(){
   var root = document.documentElement;
   function setLang(l){
