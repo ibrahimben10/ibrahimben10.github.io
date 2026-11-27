@@ -190,6 +190,38 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
 @media(max-width:560px){.skills{grid-template-columns:minmax(0,1fr)}.skills .skillgroup:nth-child(n){grid-column:auto}.cta{gap:8px}.btn{font-size:14px;padding-inline:13px}.skillgroup,.card,.sem,.contact-item{padding:20px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal-ready .reveal:not(.visible){opacity:1;transform:none}}
 @media print{.reveal-ready .reveal:not(.visible){opacity:1;transform:none}.scroll-progress{display:none}}
+
+/* Project gallery: original descriptions, illustrative artwork and expandable details */
+#projects .projects{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+#projects .work-card{display:flex;flex-direction:column;gap:0;padding:0;overflow:hidden;background:var(--surface);border-radius:26px;min-width:0}
+#projects .work-card:hover{transform:translateY(-3px)}
+#projects .work-0{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:stretch}
+.work-copy{padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.work-0 .work-copy{padding:34px}
+#projects .work-card h3{font-size:clamp(21px,2.1vw,29px);overflow-wrap:anywhere}
+#projects .work-0 h3{font-size:clamp(32px,4vw,48px)}
+#projects .work-card .q{font-size:15px;color:var(--muted)}
+#projects .work-copy>p{font-size:15px;line-height:1.6}
+#projects .work-card .top{font-size:11px;gap:6px 10px}
+#projects .work-card .btn{font-size:13px;min-height:40px;padding-inline:12px}
+.work-details{border-top:1px solid var(--line);padding-top:12px;font-size:14px;color:var(--muted)}
+.work-details summary{cursor:pointer;color:var(--accent);font-weight:600;min-height:30px}
+.work-details ul{margin-top:8px}
+.work-art{position:relative;min-height:180px;display:grid;place-items:center;overflow:hidden;padding:24px;background:#11182b;color:#e5e7ff;isolation:isolate}
+.work-art:before{content:'';position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#ffffff0b 1px,transparent 1px),linear-gradient(90deg,#ffffff0b 1px,transparent 1px);background-size:24px 24px}
+.art-colle{min-height:320px;background:radial-gradient(ellipse at 70% 20%,#4853a3,#121b38 72%)}
+.mock-window{width:min(100%,440px);border:1px solid #ffffff36;border-radius:14px;background:#f7f8ff;color:#222a48;box-shadow:0 24px 65px #0006;transform:rotate(-3deg);overflow:hidden;transition:transform .35s}
+.work-card:hover .mock-window{transform:rotate(0)}
+.mock-bar{display:flex;align-items:center;gap:5px;padding:12px;background:#222b46;color:#d9def7;font:10px var(--mono)}
+.mock-bar i{width:7px;height:7px;border-radius:50%;background:#a5b4fc;opacity:.7}.mock-bar span{margin-left:auto}
+.mock-body{display:flex;min-height:200px}.mock-side{width:22%;background:#e2e7fa;padding:14px;display:flex;flex-direction:column;gap:16px}.mock-side b{color:#4548c5;font-size:18px}.mock-side i{height:5px;background:#aab6d6;border-radius:5px}.mock-main{padding:20px;flex:1;min-width:0}.mock-main small{display:block;color:#545e91;font:10px var(--mono)}.mock-main strong{display:block;font:600 clamp(14px,2vw,24px) var(--display);margin:7px 0 14px}.mock-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.mock-tiles span{display:grid;place-items:center;background:#e6e9ff;border-radius:9px;min-height:44px;color:#4548c5;font-size:25px}.mock-line{height:8px;background:#d6dced;border-radius:8px;margin-top:12px}.mock-line.short{width:65%}
+.art-ecg{background:#101d31;gap:5px}.art-ecg svg{width:100%;max-width:320px;height:auto}.art-label{font:9px var(--mono);letter-spacing:.08em;color:#a5b4fc}
+.art-ada{background:#20203b}.terminal-art{width:100%;max-width:250px;border:1px solid #ffffff28;background:#131629;border-radius:12px;overflow:hidden}.terminal-art pre{font:12px/1.6 var(--mono);padding:10px 14px;margin:0;color:#e2e8f0;white-space:pre-wrap}.terminal-art pre span{color:#a5b4fc}.terminal-art pre em{color:#9eafbf}
+.art-snake{background:#243e38}.game-art{width:145px;background:#354d48;border:1px solid #ffffff30;border-radius:14px;padding:12px;box-shadow:0 12px 25px #0004}.game-title{font:8px var(--mono);text-align:center;color:#e4eedb}.game-art svg{display:block;width:100%;background:#b9d1a2;border-radius:5px;margin:8px 0}.game-controls{display:flex;justify-content:space-between;font-size:17px;color:#cfdfc8}
+@media(max-width:950px){#projects .projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){#projects .work-0{display:flex}.art-colle{min-height:245px}.work-0 .work-copy{padding:24px}}
+@media(max-width:560px){#projects .projects{grid-template-columns:minmax(0,1fr)}.work-copy{padding:22px}.work-art{min-height:170px}.art-colle{min-height:235px;padding:18px}}
+@media(prefers-reduced-motion:reduce){.work-card:hover .mock-window{transform:rotate(-3deg)}}
 </style>
 </head>
 <body>
@@ -315,62 +347,66 @@ footer .inner{padding-block:32px 40px; display:flex; flex-wrap:wrap; justify-con
     <div class="content">
       <div class="projects">
 
-        <article class="project">
+        <article class="project work-card work-0"><div class="work-art art-colle" aria-hidden="true"><div class="mock-window"><div class="mock-bar"><i></i><i></i><i></i><span>COLLE EXPRESS</span></div><div class="mock-body"><div class="mock-side"><b>CE.</b><i></i><i></i><i></i></div><div class="mock-main"><small>CPGE / MP</small><strong>Maths &amp; Physique</strong><div class="mock-tiles"><span>∫</span><span>∇</span><span>λ</span></div><div class="mock-line"></div><div class="mock-line short"></div></div></div></div></div><div class="work-copy">
           <div class="top"><span class="status"><span data-l="fr">Projet phare · 2026</span><span data-l="en">Featured project · 2026</span></span><span>EdTech · Web app</span></div>
           <h3>COLLE EXPRESS</h3>
           <p class="q"><span data-l="fr">Une plateforme pour rendre la préparation aux oraux scientifiques plus accessible et collaborative.</span><span data-l="en">Making scientific oral exam preparation more accessible and collaborative.</span></p>
           <p><span data-l="fr">J’ai développé une application web dédiée aux étudiants de CPGE MP pour s’entraîner en mathématiques et en physique-chimie, avec des exercices progressifs, des indices et des corrigés détaillés.</span><span data-l="en">I developed a web application for MP preparatory students to practice mathematics and physics-chemistry with progressive exercises, hints and detailed solutions.</span></p>
-          <ul>
+          <ul class="chips"><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Supabase</li><li>Cloudflare</li></ul>
+          <div class="links"><a class="btn solid" href="https://colle-express.ibrahimben930.workers.dev/#colle" target="_blank" rel="noopener"><span data-l="fr">Découvrir la plateforme ↗</span><span data-l="en">Explore the platform ↗</span></a><a class="btn" href="https://github.com/ibrahimben10/colle-express" target="_blank" rel="noopener"><span data-l="fr">Code source</span><span data-l="en">Source code</span></a></div>
+        <details class="work-details"><summary><span data-l="fr">Détails techniques</span><span data-l="en">Technical details</span></summary><ul>
             <li><span data-l="fr">Exercices classés par chapitre et niveau de concours : CCINP, Mines-Centrale, X-ENS.</span><span data-l="en">Exercises organized by topic and competitive exam level: CCINP, Mines-Centrale, X-ENS.</span></li>
             <li><span data-l="fr">Comptes utilisateurs, suivi de progression et groupes de travail.</span><span data-l="en">User accounts, progress tracking and study groups.</span></li>
             <li><span data-l="fr">Soumission de réponses, évaluation par les pairs et échanges autour des exercices.</span><span data-l="en">Answer submission, peer assessment and exercise discussions.</span></li>
           </ul>
-          <ul class="chips"><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Supabase</li><li>Cloudflare</li></ul>
-          <div class="links"><a class="btn solid" href="https://colle-express.ibrahimben930.workers.dev/#colle" target="_blank" rel="noopener"><span data-l="fr">Découvrir la plateforme ↗</span><span data-l="en">Explore the platform ↗</span></a><a class="btn" href="https://github.com/ibrahimben10/colle-express" target="_blank" rel="noopener"><span data-l="fr">Code source</span><span data-l="en">Source code</span></a></div>
-        </article>
+          </details></div></article>
 
 
-        <article class="project">
+        <article class="project work-card work-1"><div class="work-art art-ecg" aria-hidden="true"><div class="art-label">ECG / SIGNAL PROCESSING</div><svg viewBox="0 0 360 130" fill="none"><path d="M0 85H45l8 -8 8 8h20l5 8 12 -65 10 80 7 -23h28q12 -14 24 0h40l8 -8 8 8h20l5 8 12 -65 10 80 7 -23h28q12 -14 24 0h36" stroke="#67e8f9" stroke-width="2.5" stroke-linejoin="round"/><path d="M98 18V116M248 18V116M98 18H248" stroke="#818cf8" stroke-dasharray="4 4"/><text x="159" y="13" fill="#c7d2fe" font-size="12">RR</text></svg><div class="art-label">AD8232 · PYTHON · HRV</div></div><div class="work-copy">
           <div class="top"><span class="status"><span data-l="fr">TIPE · CPGE</span><span data-l="en">Research project · CPGE</span></span><span>Lycée Omar Ibn Abdelaziz, Oujda</span></div>
           <h3><span data-l="fr">Analyse des cycles cardiaques à partir des intervalles RR d’un signal ECG</span><span data-l="en">ECG Signal Processing and Heart Rate Variability Analysis from RR Intervals</span></h3>
           <p class="q"><span data-l="fr">Comment automatiser la surveillance du rythme cardiaque afin d’assurer une détection fiable des anomalies en temps réel ?</span><span data-l="en">How can heart rhythm monitoring be automated so that anomalies are detected reliably in real time?</span></p>
           <p><span data-l="fr">J’ai étudié l’influence des conditions d’acquisition et de filtrage sur la détection des pics R, la stabilité des intervalles RR et les indicateurs de variabilité cardiaque.</span><span data-l="en">I studied how acquisition and filtering conditions affect R-peak detection, the stability of RR intervals and heart rate variability indicators.</span></p>
-          <ul>
+          <ul class="chips"><li>Python</li><li>Arduino</li><li>AD8232</li><li><span data-l="fr">Traitement du signal</span><span data-l="en">Signal processing</span></li></ul>
+          <p class="note"><span data-l="fr">Projet d’étude académique, pas un outil de diagnostic médical.</span><span data-l="en">Academic engineering study, not a medical diagnostic tool.</span></p>
+          <div class="links js-links" data-repo="tipe"></div>
+        <details class="work-details"><summary><span data-l="fr">Détails techniques</span><span data-l="en">Technical details</span></summary><ul>
             <li><span data-l="fr">Acquisition d’un signal ECG avec un capteur AD8232 et une carte Arduino.</span><span data-l="en">ECG acquisition with an AD8232 sensor and an Arduino board.</span></li>
             <li><span data-l="fr">Influence de la fréquence d’échantillonnage ; filtrage analogique et numérique.</span><span data-l="en">Influence of the sampling frequency; analog and digital filtering.</span></li>
             <li><span data-l="fr">Détection des pics R, extraction des intervalles RR, indicateurs SDNN, RMSSD et LF/HF.</span><span data-l="en">R-peak detection, RR interval extraction, SDNN, RMSSD and LF/HF indicators.</span></li>
             <li><span data-l="fr">Modélisation des erreurs de mesure ; traitement des données en Python.</span><span data-l="en">Modeling of measurement errors; data processing in Python.</span></li>
           </ul>
-          <ul class="chips"><li>Python</li><li>Arduino</li><li>AD8232</li><li><span data-l="fr">Traitement du signal</span><span data-l="en">Signal processing</span></li></ul>
-          <p class="note"><span data-l="fr">Projet d’étude académique, pas un outil de diagnostic médical.</span><span data-l="en">Academic engineering study, not a medical diagnostic tool.</span></p>
-          <div class="links js-links" data-repo="tipe"></div>
-        </article>
+          </details></div></article>
 
-        <article class="project">
+        <article class="project work-card work-2"><div class="work-art art-ada" aria-hidden="true"><div class="terminal-art"><div class="mock-bar"><i></i><i></i><i></i><span>ADA / PIM</span></div><pre><span>procedure</span> Guess is
+<span>begin</span>
+  <em>-- Guess the number</em>
+  Put_Line ("?");
+<span>end</span> Guess;</pre></div></div><div class="work-copy">
           <div class="top"><span class="status"><span data-l="fr">Projet PIM · 2026</span><span data-l="en">PIM course · 2026</span></span><span>ENSEEIHT, Toulouse</span></div>
           <h3><span data-l="fr">Jeu du devin en Ada</span><span data-l="en">Guessing Game in Ada</span></h3>
           <p><span data-l="fr">Un jeu de devinette développé en Ada, en appliquant la méthodologie de programmation du cours : concevoir l’algorithme d’abord, puis le programmer de façon structurée.</span><span data-l="en">A guessing game developed in Ada, applying the course’s programming methodology: design the algorithm first, then implement it in a structured way.</span></p>
-          <ul>
+          <ul class="chips"><li>Ada</li><li><span data-l="fr">Algorithmique</span><span data-l="en">Algorithms</span></li><li><span data-l="fr">Programmation structurée</span><span data-l="en">Structured programming</span></li></ul>
+          <div class="links js-links" data-repo="pim"></div>
+        <details class="work-details"><summary><span data-l="fr">Détails techniques</span><span data-l="en">Technical details</span></summary><ul>
             <li><span data-l="fr">Conception de l’algorithme avant la programmation.</span><span data-l="en">Algorithm designed before writing any code.</span></li>
             <li><span data-l="fr">Découpage en procédures et fonctions ; structures de contrôle.</span><span data-l="en">Decomposition into procedures and functions; control structures.</span></li>
           </ul>
-          <ul class="chips"><li>Ada</li><li><span data-l="fr">Algorithmique</span><span data-l="en">Algorithms</span></li><li><span data-l="fr">Programmation structurée</span><span data-l="en">Structured programming</span></li></ul>
-          <div class="links js-links" data-repo="pim"></div>
-        </article>
+          </details></div></article>
 
-        <article class="project">
+        <article class="project work-card work-3"><div class="work-art art-snake" aria-hidden="true"><div class="game-art"><div class="game-title">POCKET SNAKE</div><svg viewBox="0 0 160 95"><path d="M28 66H79V33H120" stroke="#284636" stroke-width="12" stroke-linejoin="round" fill="none"/><rect x="131" y="59" width="9" height="9" rx="2" fill="#284636"/><circle cx="119" cy="31" r="2" fill="#b9d1a2"/></svg><div class="game-controls">✚ <span>● ●</span></div></div></div><div class="work-copy">
           <div class="top"><span class="status"><span data-l="fr">Projet personnel · 2026</span><span data-l="en">Personal project · 2026</span></span><span><span data-l="fr">Jeu web</span><span data-l="en">Web game</span></span></div>
           <h3>Pocket Snake</h3>
           <p><span data-l="fr">Le jeu Snake classique, recréé en HTML, CSS et JavaScript sans aucune bibliothèque, avec l’allure d’une console portable à écran LCD. Il se joue au clavier sur ordinateur et au doigt sur téléphone.</span><span data-l="en">The classic Snake game rebuilt in plain HTML, CSS and JavaScript with no libraries, styled like a handheld console with an LCD screen. It plays with the keyboard on a computer and by touch on a phone.</span></p>
-          <ul>
+          <ul class="chips"><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Canvas</li></ul>
+          <div class="links js-links" data-repo="snake"><a class="btn solid" href="https://ibrahimben10.github.io/pocket-snake/" target="_blank" rel="noopener"><span data-l="fr">Jouer</span><span data-l="en">Play</span></a></div>
+        <details class="work-details"><summary><span data-l="fr">Détails techniques</span><span data-l="en">Technical details</span></summary><ul>
             <li><span data-l="fr">Boucle de jeu à pas fixe avec <code>requestAnimationFrame</code> et rendu sur Canvas.</span><span data-l="en">Fixed-step game loop with <code>requestAnimationFrame</code> and Canvas rendering.</span></li>
             <li><span data-l="fr">File d’attente des directions pour éviter les demi-tours impossibles ; détection des collisions.</span><span data-l="en">Direction queue that prevents impossible U-turns; collision detection.</span></li>
             <li><span data-l="fr">Niveaux de vitesse, bonus à durée limitée, mode « murs traversables », meilleur score sauvegardé.</span><span data-l="en">Speed levels, time-limited bonus food, wrap-around walls mode, saved high score.</span></li>
             <li><span data-l="fr">Commandes clavier, glissements tactiles et croix directionnelle à l’écran.</span><span data-l="en">Keyboard controls, touch swipes and an on-screen d-pad.</span></li>
           </ul>
-          <ul class="chips"><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Canvas</li></ul>
-          <div class="links js-links" data-repo="snake"><a class="btn solid" href="https://ibrahimben10.github.io/pocket-snake/" target="_blank" rel="noopener"><span data-l="fr">Jouer</span><span data-l="en">Play</span></a></div>
-        </article>
+          </details></div></article>
 
       </div>
     </div>
